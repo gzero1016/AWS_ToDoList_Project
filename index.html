@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="./css/reset.css">
+    <link rel="stylesheet" href="./css/common.css">
+    <link rel="stylesheet" href="./css/modal.css">
+    <link rel="stylesheet" href="./css/sidebar.css">
+    <link rel="stylesheet" href="./css/welcome.css">
+    <link rel="stylesheet" href="./css/todolist.css">
+    <link rel="stylesheet" href="./css/calendar.css">
+    <script src="https://kit.fontawesome.com/959277a840.js" crossorigin="anonymous"></script>
+</head>
+<body>
+    <div id="root">
+        <div class="container">
+            <aside class="sidebar">
+                <button class="sidebar-toggle-button" onclick="sidebarToggleButtonOnClickHandle();">〓</button>
+                <h1 class="sidebar-logo">MyToDoList</h1>
+                <ul class="sidebar-menu-list">
+                    <li class="menu-items isMenuSelected" onclick="sidebarMenuOnClickHandle(this);">Main</li>
+                    <li class="menu-items" onclick="sidebarMenuOnClickHandle(this);">Calendar</li>
+                    <li class="menu-items" onclick="sidebarMenuOnClickHandle(this);">ToDoList</li>
+                </ul>
+            </aside>
+            <main class="main-container">
+                <div class="welcome-page-container">
+                    <h1 class="welcome-page-title">Welcom ToDoList</h1>
+                    <button class="calendar-button" onclick="calendarOnClickHandle();">[ Calendar ]</button>
+                    <button class="write-link-button" onclick="listOnClickHandle();">[ List ]</button>
+                </div>
+                <div class="todolist-page-container invisible">
+                    <select class="dropbox" id="status-dropdown" onchange="statusDropdownOnChangeHandle();">
+                        <option value="전체">전체</option>
+                        <option value="진행중">진행중</option>
+                        <option value="완료">완료</option>
+                    </select>
+                    <ul class="todolist-main-container">
+                        
+                    </ul>
+                </div>
+                <div class="calendar-page-container">
+                    <div class="calendar-page-left">
+
+                    </div>
+                </div>
+            </main>
+            <div class="modal invisible">
+                <div class="modal-container">
+                    <header class="modal-header">
+                        <h1 class="modal-title">
+                            제목
+                        </h1>
+                    </header>
+                    <main class="modal-main">
+                        <p class="modal-message">
+                            
+                        </p>
+                        <input type="text" class="text-input">
+                    </main>
+                    <footer class="modal-footer">
+                        <button class="btn">확인</button>
+                        <button class="btn">닫기</button>
+                    </footer>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="./js/index.js"></script>
+    <script src="./js/utils.js"></script>
+    <script src="./js/routes.js"></script>
+    <script src="./js/modal.js"></script>
+    <script src="./js/sidebar.js"></script>
+    <script src="./js/welcome.js"></script>
+    <script src="./js/todolist.js"></script>
+</body>
+</html>

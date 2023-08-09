@@ -1,0 +1,136 @@
+.todolist-page-container {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    background-color: #333;
+    z-index: 0;
+}
+
+/* todolist-page-container 클래스중 header를 가지고있는 자식요소 */
+.todolist-page-container > header {
+    margin-bottom: 15px;
+    border-bottom: 1px solid #444;
+}
+
+.todolist-main-container {
+    position: absolute;
+    right: 10px;
+    bottom: 20px;
+    padding-left: 10px;
+    padding-right: 10px;
+    width: 600px;
+    height: 600px;
+    border-left: 2px solid #777;
+    /* 높이 초과했을 시 스크롤 */
+    overflow-y: scroll;
+}
+
+.todolist-main-container::-webkit-scrollbar {
+    width: 3px;
+}
+
+.todolist-main-container::-webkit-scrollbar-thumb {
+    background-color: #dbdbdb;
+    border-radius: 3px;
+}
+
+.todolist-items {
+    display: flex;
+    /* 첫번째는 왼쪽끝 두번째는 오른쪽 끝에 정렬 */
+    justify-content: space-between;
+    align-items: center;
+    margin: 5px 0px;
+    border: 1px solid #444;
+    border-width: 1px 0px;
+    padding: 10px;
+    width: 100%;
+    height: 50px;
+    background-color: #333;
+}
+
+.todolist-content {
+    color: #eee;
+    font-size: 12px;
+}
+
+.complet-chkboxs {
+    display: none;
+}
+
+/*  complet-chkboxs 클래스를 가진 첫번째 label 요소를 선택 */
+.complet-chkboxs + label {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border: 1px solid #888;
+    border-radius: 4px;
+    width: 15px;
+    height: 15px;
+    cursor: pointer;
+}
+
+/* 위 선택된 label 요소를 선택한 후의 이벤트라 생각하면 쉬움 */
+.complet-chkboxs:checked + label::after {
+    content: " ";
+    border-radius: 2px;
+    width: 7px;
+    height: 7px;
+    background-color: #ffbb00;
+}
+
+.item-center {
+    flex-grow: 1;
+    padding: 0px 10px;
+}
+
+.item-right {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.todolist-date {
+    margin: 8px;
+    font-size: 10px;
+    color: white;
+}
+
+.todolist-item-buttons {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.btn-edit {
+    margin: 0px 2px;
+    font-size: 11px;
+    color: #ffbb00;
+    background-color: #333;
+    border: 1px solid #444;
+    border-radius: 4px;
+    padding: 5px 10px;
+    font-weight: 600;
+    cursor: pointer;
+}
+
+.btn-edit:active {
+    background-color: #ffbb00;
+    color: white;
+}
+
+.btn-remove {
+    margin: 0px 2px;
+    font-size: 11px;
+    color: #ff4400;
+    background-color: #333;
+    border: 1px solid #444;
+    border-radius: 4px;
+    padding: 5px 10px;
+    font-weight: 600;
+    cursor: pointer;
+}
+
+.btn-remove:active {
+    background-color: #ff4400;
+    color: white;
+}

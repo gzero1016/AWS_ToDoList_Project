@@ -1,0 +1,84 @@
+* {
+    box-sizing: border-box;
+    font-size: 14px;
+    color: #333;
+}
+
+.container {
+    position: relative;
+    margin: 100px auto;
+    border: 1px solid #dbdbdb;
+    border-radius: 10px;
+    width: 1000px;
+    height: 700px;
+    background-color: #fafafa;
+    overflow: hidden;
+}
+
+.btn {
+    border: 1px solid #dbdbdb;
+    border-radius: 4px;
+    padding: 5px 10px;
+    background-color: #eee;
+    font-size: 11px;
+    font-weight: 600;
+    cursor: pointer;
+}
+
+/* 눌렀을 시 효과 */
+.btn:active {
+    background-color: #eee;
+}
+
+.main-container {
+    width: 1000px;
+    height: 700px;
+}
+
+.invisible {
+    display: none !important;
+}
+
+.text-input {
+    outline: none;
+    border: 1px solid #444;
+    border-radius: 4px;
+    padding: 5px 20px;
+    width: 700px;
+    background-color: #444;
+    color: #eee;
+}
+
+.dropbox{
+    position: absolute;
+    right: 10px;
+    top: 30px;
+    outline: none;
+    border: 1px solid #444;
+    border-radius: 4px;
+    padding: 5px 20px;
+    width: 600px;
+    height: 35px;
+    background-color: #444;
+    color: #f8f5f5d0;
+}
+
+.dropbox option {
+    color: #f8f5f5d0;
+}
+
+.text-input:focus {
+    outline: 2px solid #ffbb00;
+}
+
+.dropbox:focus {
+    outline: 2px solid #ffbb00;
+}
+
+.w-f {
+    outline: none;
+    border: 1px solid #444;
+    border-radius: 4px;
+    padding: 5px 20px;
+    width: 100%;
+}

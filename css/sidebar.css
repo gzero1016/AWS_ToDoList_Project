@@ -1,0 +1,82 @@
+.sidebar {
+    transition: top 1s ease-in-out;
+    position: absolute;
+    top: -400px;
+    right: 0px;
+    border-right: 1px solid #eee;
+    width: 1000px;
+    height: 400px;
+    background-color: #444;
+    z-index: 1; 
+}
+
+.isSidebarOpen {
+    top: 0px;
+}
+
+.sidebar-toggle-button {
+    position: absolute;
+    bottom: -20px;
+    right: 100px;
+    z-index: 1; 
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border: 1px solid #666;
+    border-top-left-radius: 4px;
+    border-bottom-left-radius: 4px;
+    padding: 3px 10px;
+    width: 30px;
+    height: 20px;
+    font-size: 15px;
+    font-weight: 700;
+    background-color: #444;
+    color: white;
+    cursor: pointer;
+}
+
+.sidebar-toggle-button:active {
+    background-color: white;
+}
+
+.sidebar-logo {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 10px;
+    padding: 10px;
+    height: 60px;
+    /* 그라데이션 주는 방법 */
+    background-image: linear-gradient(to top, #444, #777);
+    font-size: 30px;
+    font-weight: 700;
+    color: #ddaf35;
+}
+
+.sidebar-menu-list {
+    border-top: 1px solid #555;
+}
+
+.menu-items {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-bottom: 1px solid #555;
+    height: 40px;
+    font-size: 12px;
+    font-weight: 700;
+    color: #eeeeee80;
+    cursor: pointer;
+}
+
+.menu-items:hover {
+    background-color: #555;
+}
+
+.menu-items:active {
+    background-color: #777;
+}
+
+.isMenuSelected {
+    background-color: #444;
+}
