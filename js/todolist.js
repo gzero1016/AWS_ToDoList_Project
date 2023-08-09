@@ -3,27 +3,28 @@ const addTodoButtonOnClickHandle = () => {
 }
 
 // 드롭다운 박스의 옵션 값을 읽어와서 필터링하는 함수
+const statusDropdown = document.querySelector("#status-dropdown");
 const statusDropdownOnChangeHandle = () => {
-    const statusDropdown = document.querySelector("#status-dropdown");
     const selectedStatus = statusDropdown.options[statusDropdown.selectedIndex].value;
 
     let statusValue;
     switch (selectedStatus) {
         case "전체":
-            statusValue = null; // null로 설정하여 모든 상태를 표시
+            statusValue = null;
             break;
         case "진행중":
-            statusValue = false; // false로 설정하여 진행중인 상태만 표시
+            statusValue = false;
             break;
         case "완료":
-            statusValue = true; // true로 설정하여 완료된 상태만 표시
+            statusValue = true;
             break;
         default:
             statusValue = null;
             break;
     }
 
-    filterTodoList(statusValue);
+    currentFilterStatus = statusValue;
+    filterTodoList(currentFilterStatus);
 }
 
 // enter 눌렀을 시 generateTodoObj 함수 호출
@@ -37,9 +38,9 @@ const checkedOnChangeHandle = (target) => {
     TodoListService.getInstance().setCompleStatus(target.value, target.checked);
 }
 
-const modifyTodoOnClickHandle = (target) => {
+const modifyTodoOnClickHandle = (target, filterStatus) => {
     openModal();
-    modifyModal(TodoListService.getInstance().getTodoById(target.value));
+    modifyModal(TodoListService.getInstance().getTodoById(target.value), filterStatus);
 }
 
 const deleteTodoOnClickHandle = (target) => {

@@ -10,10 +10,11 @@ const closeModal = () => {
     modal.innerHTML = "";
 }
 
-const modifySubmitButtonOnClick = (id) => {
+const modifySubmitButtonOnClick = (id, filterStatus) => {
     const newTodoContent = document.querySelector(".modal-main .w-f").value;
     const todo = TodoListService.getInstance().getTodoById(id);
-    if(todo.todoContent === newTodoContent || !newTodoContent) {
+    if (todo.todoContent === newTodoContent || !newTodoContent) {
+        closeModal();
         return;
     }
     const todoObj = {
@@ -21,6 +22,8 @@ const modifySubmitButtonOnClick = (id) => {
         todoContent: newTodoContent
     }
     TodoListService.getInstance().setTodo(todoObj);
+    statusDropdownOnChangeHandle(filterStatus); // 수정 후에도 필터링 값을 적용
+    closeModal();
 }
 
 const modifyModal = (todo) => {
@@ -39,9 +42,14 @@ const modifyModal = (todo) => {
                 <input type="text" class="w-f" value="${todo.todoContent}">
             </main>
             <footer class="modal-footer">
-                <button class="btn" onclick="modifySubmitButtonOnClick(${todo.id}); closeModal();">확인</button>
-                <button class="btn" onclick="closeModal();">닫기</button>
+            <button class="btn" onclick="modifySubmitButtonOnClick(${todo.id}); closeModal();">확인</button>
+            <button class="btn" onclick="closeModal();">닫기</button>
             </footer>
         </div>
     `;
+    const submitButton = modal.querySelector(".btn");
+    submitButton.addEventListener("click", () => {
+        modifySubmitButtonOnClick(todo.id, currentFilterStatus); // 수정 함수 호출 시 필터링 값을 전달
+        closeModal();
+    });
 }
