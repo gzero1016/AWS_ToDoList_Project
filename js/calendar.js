@@ -131,4 +131,3 @@ function initializeCalendar() {
     clickedWeekdayDisplay.textContent = todayWeekdayName;
     clickedDateDisplay.textContent = `${todayDate}`;
 }
-
