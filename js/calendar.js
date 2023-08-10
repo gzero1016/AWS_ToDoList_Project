@@ -26,7 +26,7 @@ function showCalendar() {
         contentText.textContent = currentDate.getDate();
         
         if (isToday(currentDate)) {
-            contentText.classList.add("today"); // 특정 클래스 추가
+            contentText.classList.add("today");
         }
         
         contentText.addEventListener("click", () => {
@@ -44,7 +44,7 @@ function showCalendar() {
         currentDate.setDate(currentDate.getDate() + 1);
     }
     
-    const monthName = monthNames[calendarDate.getMonth()]; // 월 이름 가져오기
+    const monthName = monthNames[calendarDate.getMonth()];
     
     monthDisplay.textContent = `${monthName} ${calendarDate.getFullYear()}`;
 }
@@ -74,6 +74,16 @@ clickedDateDisplay.textContent = `${todayDate}`;
 // 캘린더 초기화
 showCalendar();
 
+function filterTodoListForSelectedDate(selectedDate) {
+    const selectedWeekday = selectedDate.getDay(); // 0 (일요일) 부터 6 (토요일)까지의 값
+    const tempArray = TodoListService.getInstance().todoList.filter((todo) => {
+        const todoDate = new Date(todo.createDate);
+        return todoDate.getDay() === selectedWeekday;
+    });
+
+    TodoListService.getInstance().updateTodoList(tempArray);
+}
+
 function handleDateClick(date) {
     let clickedDateInfo = null;
 
@@ -94,17 +104,11 @@ function handleDateClick(date) {
         clickedWeekdayDisplay.textContent = `${weekdayName}`;
         clickedDateDisplay.textContent = `${day}`;
 
-        clickedDateInfo = {
-            year: year,
-            month: monthName,
-            day: day
-        };
-        
         calendarPageContainer.classList.add("isToDoListSidebarOpen");
 
         generateTodoObj(year, monthName, day); // 수정된 generateTodoObj 함수 호출
+    
     }
-
     TodoListService.getInstance().updateTodoList();
 }
 

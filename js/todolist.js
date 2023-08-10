@@ -47,8 +47,7 @@ const generateTodoObj = () => {
         return;
     }
 
-    const todoListContainer = document.querySelector(".todolist-calendar-container");
-    const todoItem = document.createElement("li");
+    const todoListContainer = document.querySelector(".todolist-main-container");
 
     const clickedMonthDisplay = document.querySelector(".calendar-month");
     const clickedDateDisplay = document.querySelector(".calendar-day");
@@ -64,13 +63,6 @@ const generateTodoObj = () => {
     };
 
     TodoListService.getInstance().addTodo(todoObj);
-
-    todoItem.innerHTML = `
-        <span class="todo-item-text">${inputText}</span>
-        <span class="todo-item-date">${todoDateString}</span>
-    `;
-
-    todoListContainer.appendChild(todoItem);
 
     document.querySelector(".text-input").value = "";
 }

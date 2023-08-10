@@ -14,13 +14,11 @@
 
 .todolist-main-container {
     position: absolute;
-    right: 10px;
     bottom: 20px;
     padding-left: 10px;
     padding-right: 10px;
-    width: 600px;
+    width: 1000px;
     height: 600px;
-    border-left: 2px solid #777;
     /* 높이 초과했을 시 스크롤 */
     overflow-y: scroll;
 }
@@ -41,7 +39,6 @@
     font-size: 25px;
     font-weight: 600;
 }
-
 .todolist-items {
     display: flex;
     /* 첫번째는 왼쪽끝 두번째는 오른쪽 끝에 정렬 */
@@ -55,7 +52,8 @@
     height: 50px;
     background-color: #333;
 }
-
+.todo-item-date,
+.todo-item-text,
 .todolist-content {
     color: #eee;
     font-size: 12px;

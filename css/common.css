@@ -61,13 +61,13 @@
 
 .dropbox{
     position: absolute;
-    right: 10px;
+    left: 25px;
     top: 30px;
     outline: none;
     border: 1px solid #444;
     border-radius: 4px;
-    padding: 5px 20px;
-    width: 600px;
+    padding: px 20px;
+    width: 950px;
     height: 35px;
     background-color: #444;
     color: #f8f5f5d0;
