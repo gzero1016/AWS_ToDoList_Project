@@ -2,12 +2,6 @@ const addTodoButtonOnClickHandle = () => {
     generateTodoObj();
 }
 
-const addTodoOnKeyUpHandle = (event) => {
-    if(event.keyCode === 13) {
-        generateTodoObj();
-    }
-}
-
 // 드롭다운 박스의 옵션 값을 읽어와서 필터링하는 함수
 const statusDropdown = document.querySelector("#status-dropdown");
 const statusDropdownOnChangeHandle = () => {
@@ -47,16 +41,38 @@ const deleteTodoOnClickHandle = (target) => {
 }
 
 const generateTodoObj = () => {
-    const todoContent = document.querySelector(".calendar-page-left .text-input").value;
+    const inputText = document.querySelector(".text-input").value;
+
+    if (inputText === "") {
+        return;
+    }
+
+    const todoListContainer = document.querySelector(".todolist-calendar-container");
+    const todoItem = document.createElement("li");
+
+    const clickedMonthDisplay = document.querySelector(".calendar-month");
+    const clickedDateDisplay = document.querySelector(".calendar-day");
+
+    const todoDate = DateUtils.getDateFromCalendarElements(clickedMonthDisplay, clickedDateDisplay); // 수정된 부분
+    const todoDateString = DateUtils.toStringByFormatting(todoDate);
 
     const todoObj = {
         id: 0,
-        todoContent: todoContent,
-        createDate: DateUtils.toStringByFormatting(new Date()),
+        todoContent: inputText,
+        createDate: todoDateString,
         completStatus: false
     };
 
     TodoListService.getInstance().addTodo(todoObj);
+
+    todoItem.innerHTML = `
+        <span class="todo-item-text">${inputText}</span>
+        <span class="todo-item-date">${todoDateString}</span>
+    `;
+
+    todoListContainer.appendChild(todoItem);
+
+    document.querySelector(".text-input").value = "";
 }
 
 // 검색 결과를 필터링하여 업데이트

@@ -1,6 +1,6 @@
 class DateUtils {
     static leftPad(value) {
-        if(value >= 10) {
+        if (value >= 10) {
             return value;
         }
 
@@ -13,5 +13,14 @@ class DateUtils {
         const day = this.leftPad(date.getDate());
 
         return [year, month, day].join("-");
+    }
+
+    static getDateFromCalendarElements(calendarMonth, calendarDay) {
+        const currentDate = new Date();
+        const year = currentDate.getFullYear();
+        const month = calendarMonth.textContent.split(" ")[0];
+        const day = parseInt(calendarDay.textContent);
+
+        return new Date(year, monthNames.indexOf(month), day);
     }
 }

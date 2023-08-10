@@ -95,12 +95,14 @@ function handleDateClick(date) {
         clickedDateDisplay.textContent = `${day}`;
 
         clickedDateInfo = {
-            year: calendarDate.getFullYear(),
-            month: calendarDate.getMonth() + 1,
+            year: year,
+            month: monthName,
             day: day
         };
         
         calendarPageContainer.classList.add("isToDoListSidebarOpen");
+
+        generateTodoObj(year, monthName, day); // 수정된 generateTodoObj 함수 호출
     }
 
     TodoListService.getInstance().updateTodoList();
