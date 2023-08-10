@@ -2,9 +2,9 @@ const calendarBody = document.getElementById("calendar-body");
 const monthDisplay = document.querySelector(".calendar-month");
 const monthNames = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
 const weekdayNames = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
+let calendarDate = new Date();  //현재 날짜 캘린터 기본값
 
-let calendarDate = new Date();
-
+//캘린더 표시 함수
 function showCalendar() {
     const firstDay = new Date(calendarDate.getFullYear(), calendarDate.getMonth(), 1);
     const lastDay = new Date(calendarDate.getFullYear(), calendarDate.getMonth() + 1, 0);
@@ -15,12 +15,12 @@ function showCalendar() {
     let weekRow = document.createElement("tr");
     
     for (let i = 0; i < firstDay.getDay(); i++) {
-        const emptyCell = document.createElement("td");
+        const emptyCell = document.createElement("td"); //빈 셀 생성
         weekRow.appendChild(emptyCell);
     }
     
     while (currentDate <= lastDay) {
-        const cell = document.createElement("td");
+        const cell = document.createElement("td");  //날짜 셀 생성
         const content = document.createElement("div");
         const contentText = document.createElement("span");
         contentText.textContent = currentDate.getDate();
@@ -30,7 +30,7 @@ function showCalendar() {
         }
         
         contentText.addEventListener("click", () => {
-            handleDateClick(contentText.textContent);
+            handleDateClick(contentText.textContent);   //날짜 클릭 이벤트 처리
         });
         content.appendChild(contentText);
         cell.appendChild(content);
@@ -49,7 +49,7 @@ function showCalendar() {
     monthDisplay.textContent = `${monthName} ${calendarDate.getFullYear()}`;
 }
 
-
+//오늘날짜 확인
 function isToday(date) {
     const today = new Date();
     return date.getFullYear() === today.getFullYear() &&
@@ -57,12 +57,13 @@ function isToday(date) {
            date.getDate() === today.getDate();
 }
 
+//날짜 클릭 이벤트 처리 함수
 function handleDateClick(date) {
 
     TodoListService.getInstance().updateTodoList();
 }
 
-// 최초로 캘린더를 초기화할 때, 오늘 날짜와 요일을 표시
+// 캘린더 초기화 시 오늘 날짜와 요일 표시
 const todayWeekdayName = weekdayNames[new Date().getDay()];
 const todayDate = new Date().getDate();
 const clickedWeekdayDisplay = document.querySelector(".calendar-m");
@@ -73,8 +74,9 @@ clickedDateDisplay.textContent = `${todayDate}`;
 // 캘린더 초기화
 showCalendar();
 
+// 선택된 날짜에 해당하는 ToDo 목록 필터링
 function filterTodoListForSelectedDate(selectedDate) {
-    const selectedWeekday = selectedDate.getDay();
+    const selectedWeekday = selectedDate.getDay();  // 선택한 날짜의 요일
     const tempArray = TodoListService.getInstance().todoList.filter((todo) => {
         const todoDate = new Date(todo.createDate);
         return todoDate.getDay() === selectedWeekday;
@@ -83,6 +85,7 @@ function filterTodoListForSelectedDate(selectedDate) {
     TodoListService.getInstance().updateTodoList(tempArray);
 }
 
+// 날짜 클릭 이벤트 처리
 function handleDateClick(date) {
     let clickedDateInfo = null;
 
@@ -92,6 +95,7 @@ function handleDateClick(date) {
     const clickedWeekdayDisplay = document.querySelector(".calendar-m");
     const clickedDateDisplay = document.querySelector(".calendar-day");
     
+    // 캘린더 사이드바가 열려있지 않거나 선택한 날짜가 이전 선택과 다를 경우 처리
     if (!calendarPageContainer.classList.contains("isToDoListSidebarOpen") || clickedDateDisplay.textContent !== `${date}일`) {
         const year = calendarDate.getFullYear();
         const monthName = monthNames[calendarDate.getMonth()];
@@ -105,24 +109,26 @@ function handleDateClick(date) {
 
         calendarPageContainer.classList.add("isToDoListSidebarOpen");
 
-        generateTodoObj(year, monthName, day);
+        generateTodoObj(year, monthName, day);   // 선택한 날짜에 따른 ToDo 생성
     
 
     }
     TodoListService.getInstance().updateTodoList();
 }
 
+// 이전 달로 이동하는 함수
 function beforeMonth() {
     calendarDate = new Date(calendarDate.getFullYear(), calendarDate.getMonth() - 1, calendarDate.getDate());
     showCalendar();
 }
 
+document.getElementById("beforebtn").addEventListener("click", beforeMonth);
+
+// 다음 달로 이동하는 함수
 function nextMonth() {
     calendarDate = new Date(calendarDate.getFullYear(), calendarDate.getMonth() + 1, calendarDate.getDate());
     showCalendar();
 }
-
-document.getElementById("beforebtn").addEventListener("click", beforeMonth);
 
 document.getElementById("nextbtn").addEventListener("click", nextMonth);
 

@@ -1,3 +1,4 @@
+// 버튼 클릭 이벤트 핸들러
 const addTodoButtonOnClickHandle = () => {
     generateTodoObj();
 }
@@ -24,22 +25,27 @@ const statusDropdownOnChangeHandle = () => {
     }
 
     currentFilterStatus = statusValue;
-    filterTodoList(currentFilterStatus);
+    filterTodoList(currentFilterStatus);  // 선택된 필터링 상태로 Todo 리스트를 필터링하여 업데이트
 }
 
+// 체크박스 변경 이벤트 핸들러
 const checkedOnChangeHandle = (target) => {
     TodoListService.getInstance().setCompleStatus(target.value, target.checked);
 }
 
+// "수정" 버튼 클릭 이벤트 핸들러
 const modifyTodoOnClickHandle = (target, filterStatus) => {
-    openModal();
-    modifyModal(TodoListService.getInstance().getTodoById(target.value), filterStatus);
+    openModal();    //모달열기
+    // 선택된 Todo 정보로 모달 수정 폼을 업데이트
+    modifyModal(TodoListService.getInstance().getTodoById(target.value), filterStatus); 
 }
 
+// "삭제" 버튼 클릭 이벤트 핸들러
 const deleteTodoOnClickHandle = (target) => {
-    TodoListService.getInstance().removeTodo(target.value);
+    TodoListService.getInstance().removeTodo(target.value); // 선택된 Todo 삭제
 }
 
+// "Add Todo" 버튼 클릭 시 Todo를 생성하는 함수
 const generateTodoObj = () => {
     const inputText = document.querySelector(".text-input").value;
 
@@ -47,23 +53,24 @@ const generateTodoObj = () => {
         return;
     }
 
-    const todoListContainer = document.querySelector(".todolist-main-container");
-
+    // 캘린더에서 선택한 날짜 정보 가져오기
     const clickedMonthDisplay = document.querySelector(".calendar-month");
     const clickedDateDisplay = document.querySelector(".calendar-day");
-
     const todoDate = DateUtils.getDateFromCalendarElements(clickedMonthDisplay, clickedDateDisplay);
     const todoDateString = DateUtils.toStringByFormatting(todoDate);
 
+    // Todo 객체 생성
     const todoObj = {
-        id: 0,
+        id: 0,   // 아이디는 TodoListService에서 처리
         todoContent: inputText,
         createDate: todoDateString,
         completStatus: false
     };
 
-    TodoListService.getInstance().addTodo(todoObj);
+     // TodoListService를 이용하여 Todo 추가
+    TodoListService.getInstance().addTodo(todoObj); 
 
+    // 입력 필드 초기화
     document.querySelector(".text-input").value = "";
 }
 
@@ -72,27 +79,31 @@ function filterTodoList(completStatus) {
     let tempArray = [];
     
     if (completStatus === null) {
-        tempArray = TodoListService.getInstance().todoList;
+        tempArray = TodoListService.getInstance().todoList; // 선택된 필터가 "전체"면 전체 리스트를 보여줌
     } else {
         tempArray = TodoListService.getInstance().todoList.filter((todo) => {
-            return todo.completStatus === completStatus;
+            return todo.completStatus === completStatus;     // 선택된 필터링 상태에 따라 필터링된 Todo 리스트를 보여줌
         });
     }
 
-    TodoListService.getInstance().updateTodoList(tempArray);
+    TodoListService.getInstance().updateTodoList(tempArray);     // 업데이트된 Todo 리스트를 출력
 }
 
+// 캘린더 이벤트를 필터링하여 업데이트
 function filterCalendarList(year, month, day) {
     const tempArray = CalendarService.getInstance().calendarList.filter((event) => {
         const eventDate = new Date(event.year, event.month - 1, event.day);
         const filterDate = new Date(year, month - 1, day);
 
+        // 선택된 날짜와 일치하는 이벤트만 보여줌
         return eventDate.toDateString() === filterDate.toDateString();
     });
 
+    // 업데이트된 캘린더 이벤트 리스트를 출력
     CalendarService.getInstance().updateCalendarList(tempArray);
 }
 
+// Todo 리스트 관리 서비스 클래스
 class TodoListService {
     static #instance = null;
 
@@ -103,6 +114,7 @@ class TodoListService {
         return this.#instance;
     }
 
+    // Todo 리스트와 인덱스 초기화
     todoList = new Array();
     todoIndex = 1;
 
@@ -110,19 +122,23 @@ class TodoListService {
         this.loadTodoList();
     }
 
+     // 로컬 스토리지에서 Todo 리스트 로드
     loadTodoList() {
         this.todoList = !!localStorage.getItem("todoList") ? JSON.parse(localStorage.getItem("todoList")) : new Array();
         this.todoIndex = !!this.todoList[this.todoList.length - 1]?.id ? this.todoList[this.todoList.length - 1].id + 1 : 1;
     }
 
+    // 로컬 스토리지에 Todo 리스트 저장
     saveLocalStorage() {
         localStorage.setItem("todoList", JSON.stringify(this.todoList));
     }
 
+    // 아이디로 Todo 가져오기
     getTodoById(id) {
         return this.todoList.filter(todo => todo.id === parseInt(id))[0];
     }
 
+    // Todo 추가
     addTodo(todoObj) {
         const todo = {
             ...todoObj,
@@ -138,6 +154,7 @@ class TodoListService {
         this.todoIndex++;
     }
 
+    // 완료 상태 업데이트
     setCompleStatus(id, status) {
         this.todoList.forEach((todo, index) => {
             if(todo.id === parseInt(id)) {
@@ -148,6 +165,7 @@ class TodoListService {
         this.saveLocalStorage();
     }
 
+    // Todo 업데이트
     setTodo(todoObj) {
         for(let i = 0; i < this.todoList.length; i++) {
             if(this.todoList[i].id === todoObj.id) {
@@ -161,6 +179,7 @@ class TodoListService {
         this.updateTodoList();
     }
 
+    // Todo 삭제
     removeTodo(id) {
         this.todoList = this.todoList.filter(todo => {
             return todo.id !== parseInt(id);
@@ -170,7 +189,8 @@ class TodoListService {
         this.updateTodoList();
     }
 
-updateTodoList(filteredList = null) {
+        // Todo 리스트 업데이트
+    updateTodoList(filteredList = null) {
     const todoListToShow = filteredList || this.todoList;
     const todolistMainContainer = document.querySelector(".todolist-main-container");
 
