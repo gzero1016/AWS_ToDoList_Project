@@ -1,14 +1,12 @@
 .calendar-page-container {
-    display: flex;
-    justify-content: center;
-    align-items: center;
+    position: relative;
     width: 100%;
     height: 100%;
-    background-color: #ddaf35;
-    position: relative;
+    background-color: #333;
 }
 
 .calendar-page-left {
+<<<<<<< HEAD
     width: 50%;
     height: 100%;
     background-color: #333;
@@ -164,3 +162,11 @@
     font-weight: 400;
     color: white;
 }
+=======
+    position: absolutea;
+    left: 0px;
+    width: 500px;
+    height: 700px;
+    background-color: #ddaf35;
+}
+>>>>>>> parent of 3ad1c50 (feat: calendar 완성)
