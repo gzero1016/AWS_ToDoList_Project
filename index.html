@@ -43,7 +43,34 @@
                 </div>
                 <div class="calendar-page-container">
                     <div class="calendar-page-left">
-
+                        <!-- 왼쪽 내용을 여기에 넣으세요 -->
+                    </div>
+                    <div class="calendar-wrapper">
+                        <header class="calendar-header">
+                            <button id="beforebtn" class="calendar-before-button">
+                                <i class="fa-solid fa-chevron-left fa-lg"></i>
+                            </button>
+                            <div class="calendar-month"></div>
+                            <button id="nextbtn" class="calendar-next-button">
+                                <i class="fa-solid fa-chevron-right fa-lg"></i>
+                            </button>
+                        </header>
+                        <table class="calendar-table">
+                            <thead class="calendar-thead">
+                                <tr>
+                                    <th>일</th>
+                                    <th>월</th>
+                                    <th>화</th>
+                                    <th>수</th>
+                                    <th>목</th>
+                                    <th>금</th>
+                                    <th>토</th>
+                                </tr>
+                            </thead>
+                            <tbody id="calendar-body" class="calendar-tbody">
+                
+                            </tbody>
+                        </table>
                     </div>
                 </div>
             </main>
@@ -75,5 +102,6 @@
     <script src="./js/sidebar.js"></script>
     <script src="./js/welcome.js"></script>
     <script src="./js/todolist.js"></script>
+    <script src="./js/calendar.js"></script>
 </body>
 </html>
