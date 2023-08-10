@@ -19,6 +19,7 @@ const sidebarMenuOnClickHandle = (target) => {
             break;
         case "Calendar":
             Routes.getInstance().routeState = "calendar";
+            initializeCalendar();
         break;
     }
 

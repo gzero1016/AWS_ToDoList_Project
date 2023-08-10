@@ -15,19 +15,24 @@
     overflow: hidden;
 }
 
-.btn {
-    border: 1px solid #dbdbdb;
+.calendar-btn {
+    position: absolute;
+    bottom: 300px;
+    left: 410px;
+    outline: none;
     border-radius: 4px;
-    padding: 5px 10px;
-    background-color: #eee;
-    font-size: 11px;
-    font-weight: 600;
+    padding: 5px 15px;
+    height: 30px;
+    background-color: #333;
+    color: #eee;
+    font-size: 12px;
+    font-weight: 500;
     cursor: pointer;
 }
 
 /* 눌렀을 시 효과 */
-.btn:active {
-    background-color: #eee;
+.calendar-btn:active {
+    background-color: #555;
 }
 
 .main-container {
@@ -40,13 +45,18 @@
 }
 
 .text-input {
+    position: absolute;
+    bottom: 300px;
+    left: 30px;
     outline: none;
-    border: 1px solid #444;
+    border: 1px solid #333;
     border-radius: 4px;
     padding: 5px 20px;
-    width: 700px;
+    width: 370px;
+    height: 30px;
     background-color: #444;
     color: #eee;
+    font-size: 12px;
 }
 
 .dropbox{
@@ -67,12 +77,8 @@
     color: #f8f5f5d0;
 }
 
-.text-input:focus {
-    outline: 2px solid #ffbb00;
-}
-
 .dropbox:focus {
-    outline: 2px solid #ffbb00;
+    outline: 1px solid #ffbb00;
 }
 
 .w-f {

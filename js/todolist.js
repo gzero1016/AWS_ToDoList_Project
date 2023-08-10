@@ -2,6 +2,12 @@ const addTodoButtonOnClickHandle = () => {
     generateTodoObj();
 }
 
+const addTodoOnKeyUpHandle = (event) => {
+    if(event.keyCode === 13) {
+        generateTodoObj();
+    }
+}
+
 // 드롭다운 박스의 옵션 값을 읽어와서 필터링하는 함수
 const statusDropdown = document.querySelector("#status-dropdown");
 const statusDropdownOnChangeHandle = () => {
@@ -27,13 +33,6 @@ const statusDropdownOnChangeHandle = () => {
     filterTodoList(currentFilterStatus);
 }
 
-// enter 눌렀을 시 generateTodoObj 함수 호출
-const addTodoOnKeyUpHandle = (event) => {
-    if(event.keyCode === 13) {
-        generateTodoObj();
-    }
-}
-
 const checkedOnChangeHandle = (target) => {
     TodoListService.getInstance().setCompleStatus(target.value, target.checked);
 }
@@ -48,7 +47,7 @@ const deleteTodoOnClickHandle = (target) => {
 }
 
 const generateTodoObj = () => {
-    const todoContent = document.querySelector(".todolist-header-items .text-input").value;
+    const todoContent = document.querySelector(".calendar-page-left .text-input").value;
 
     const todoObj = {
         id: 0,

@@ -1,5 +1,7 @@
 const calendarBody = document.getElementById("calendar-body");
 const monthDisplay = document.querySelector(".calendar-month");
+const monthNames = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
+const weekdayNames = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
 
 let calendarDate = new Date();
 
@@ -42,8 +44,11 @@ function showCalendar() {
         currentDate.setDate(currentDate.getDate() + 1);
     }
     
-    monthDisplay.textContent = `${calendarDate.getFullYear()}년 ${calendarDate.getMonth() + 1}월`;
+    const monthName = monthNames[calendarDate.getMonth()]; // 월 이름 가져오기
+    
+    monthDisplay.textContent = `${monthName} ${calendarDate.getFullYear()}`;
 }
+
 
 function isToday(date) {
     const today = new Date();
@@ -52,41 +57,53 @@ function isToday(date) {
            date.getDate() === today.getDate();
 }
 
+function handleDateClick(date) {
+    // handleDateClick 함수 내용은 이전과 동일하게 유지
+
+    TodoListService.getInstance().updateTodoList();
+}
+
+// 최초로 캘린더를 초기화할 때, 오늘 날짜와 요일을 표시
+const todayWeekdayName = weekdayNames[new Date().getDay()];
+const todayDate = new Date().getDate();
+const clickedWeekdayDisplay = document.querySelector(".calendar-m");
+const clickedDateDisplay = document.querySelector(".calendar-day");
+clickedWeekdayDisplay.textContent = todayWeekdayName;
+clickedDateDisplay.textContent = `${todayDate}`;
+
+// 캘린더 초기화
+showCalendar();
 
 function handleDateClick(date) {
     let clickedDateInfo = null;
 
-    const todoListSideBar = document.querySelector(".todolist-sidebar");
+    const calendarPageContainer = document.querySelector(".calendar-page-container");
     const mainContainer = document.querySelector(".main-container");
-    const isToDoListSidebarOpen = "isToDoListSibebarOpen"; 
     
-    const clickedDateDisplay = document.querySelector(".todolist-sidebar-date");
+    const clickedWeekdayDisplay = document.querySelector(".calendar-m");
+    const clickedDateDisplay = document.querySelector(".calendar-day");
     
-    todoListSideBar.classList.toggle(isToDoListSidebarOpen);
-    
-    if (todoListSideBar.classList.contains(isToDoListSidebarOpen)) {
-        mainContainer.style.transform = `translateX(-${150}px)`;
-        
+    if (!calendarPageContainer.classList.contains("isToDoListSidebarOpen") || clickedDateDisplay.textContent !== `${date}일`) {
         const year = calendarDate.getFullYear();
-        const month = calendarDate.getMonth() + 1;
+        const monthName = monthNames[calendarDate.getMonth()];
+        const day = date;
+
+        const clickedDate = new Date(year, calendarDate.getMonth(), day);
+        const weekdayName = weekdayNames[clickedDate.getDay()]; // 선택한 날짜의 영어 요일 이름
         
-        clickedDateDisplay.textContent = `${year}년 ${month}월 ${date}일`
+        clickedWeekdayDisplay.textContent = `${weekdayName}`;
+        clickedDateDisplay.textContent = `${day}`;
 
         clickedDateInfo = {
             year: calendarDate.getFullYear(),
             month: calendarDate.getMonth() + 1,
-            day: date
+            day: day
         };
-    
         
-    } else {
-        mainContainer.style.transform = "none";
-        clickedDateDisplay.textContent = "";
-
+        calendarPageContainer.classList.add("isToDoListSidebarOpen");
     }
 
     TodoListService.getInstance().updateTodoList();
-
 }
 
 function beforeMonth() {
@@ -104,3 +121,14 @@ document.getElementById("beforebtn").addEventListener("click", beforeMonth);
 document.getElementById("nextbtn").addEventListener("click", nextMonth);
 
 showCalendar();
+
+// 오늘날짜로 초기화
+function initializeCalendar() {
+    const today = new Date();
+    const todayWeekdayName = weekdayNames[today.getDay()];
+    const todayDate = today.getDate();
+
+    clickedWeekdayDisplay.textContent = todayWeekdayName;
+    clickedDateDisplay.textContent = `${todayDate}`;
+}
+

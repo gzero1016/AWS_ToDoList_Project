@@ -34,6 +34,14 @@
     border-radius: 3px;
 }
 
+.todolist-sidebar-date {
+    margin: 10px;
+    padding: 5px;
+    text-align: center;
+    font-size: 25px;
+    font-weight: 600;
+}
+
 .todolist-items {
     display: flex;
     /* 첫번째는 왼쪽끝 두번째는 오른쪽 끝에 정렬 */

@@ -28,7 +28,7 @@
             <main class="main-container">
                 <div class="welcome-page-container">
                     <h1 class="welcome-page-title">Welcom ToDoList</h1>
-                    <button class="calendar-button" onclick="calendarOnClickHandle();">[ Calendar ]</button>
+                    <button class="calendar-button" onclick="calendarOnClickHandle(); initializeCalendar();">[ Calendar ]</button>
                     <button class="write-link-button" onclick="listOnClickHandle();">[ List ]</button>
                 </div>
                 <div class="todolist-page-container invisible">
@@ -38,12 +38,16 @@
                         <option value="완료">완료</option>
                     </select>
                     <ul class="todolist-main-container">
-                        
                     </ul>
                 </div>
                 <div class="calendar-page-container">
                     <div class="calendar-page-left">
-                        <!-- 왼쪽 내용을 여기에 넣으세요 -->
+                        <h2 class="calendar-m"></h2>
+                        <h1 class="calendar-day"></h1>
+                        <input type="text" placeholder="please write here!" class="text-input">
+                        <button class="calendar-btn" onclick="addTodoButtonOnClickHandle();">InPut</button>
+                        <ul class="todolist-calendar-container">
+                        </ul>
                     </div>
                     <div class="calendar-wrapper">
                         <header class="calendar-header">
@@ -58,17 +62,16 @@
                         <table class="calendar-table">
                             <thead class="calendar-thead">
                                 <tr>
-                                    <th>일</th>
-                                    <th>월</th>
-                                    <th>화</th>
-                                    <th>수</th>
-                                    <th>목</th>
-                                    <th>금</th>
-                                    <th>토</th>
+                                    <th>Sun</th>
+                                    <th>Mon</th>
+                                    <th>Tue</th>
+                                    <th>Wed</th>
+                                    <th>Thu</th>
+                                    <th>Fri</th>
+                                    <th>Sat</th>
                                 </tr>
                             </thead>
                             <tbody id="calendar-body" class="calendar-tbody">
-                
                             </tbody>
                         </table>
                     </div>
