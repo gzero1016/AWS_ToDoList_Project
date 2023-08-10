@@ -52,7 +52,7 @@ const generateTodoObj = () => {
     const clickedMonthDisplay = document.querySelector(".calendar-month");
     const clickedDateDisplay = document.querySelector(".calendar-day");
 
-    const todoDate = DateUtils.getDateFromCalendarElements(clickedMonthDisplay, clickedDateDisplay); // 수정된 부분
+    const todoDate = DateUtils.getDateFromCalendarElements(clickedMonthDisplay, clickedDateDisplay);
     const todoDateString = DateUtils.toStringByFormatting(todoDate);
 
     const todoObj = {
@@ -80,6 +80,17 @@ function filterTodoList(completStatus) {
     }
 
     TodoListService.getInstance().updateTodoList(tempArray);
+}
+
+function filterCalendarList(year, month, day) {
+    const tempArray = CalendarService.getInstance().calendarList.filter((event) => {
+        const eventDate = new Date(event.year, event.month - 1, event.day);
+        const filterDate = new Date(year, month - 1, day);
+
+        return eventDate.toDateString() === filterDate.toDateString();
+    });
+
+    CalendarService.getInstance().updateCalendarList(tempArray);
 }
 
 class TodoListService {

@@ -6,12 +6,6 @@
     z-index: 0;
 }
 
-/* todolist-page-container 클래스중 header를 가지고있는 자식요소 */
-.todolist-page-container > header {
-    margin-bottom: 15px;
-    border-bottom: 1px solid #444;
-}
-
 .todolist-main-container {
     position: absolute;
     bottom: 20px;

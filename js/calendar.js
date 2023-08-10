@@ -58,7 +58,6 @@ function isToday(date) {
 }
 
 function handleDateClick(date) {
-    // handleDateClick 함수 내용은 이전과 동일하게 유지
 
     TodoListService.getInstance().updateTodoList();
 }
@@ -75,7 +74,7 @@ clickedDateDisplay.textContent = `${todayDate}`;
 showCalendar();
 
 function filterTodoListForSelectedDate(selectedDate) {
-    const selectedWeekday = selectedDate.getDay(); // 0 (일요일) 부터 6 (토요일)까지의 값
+    const selectedWeekday = selectedDate.getDay();
     const tempArray = TodoListService.getInstance().todoList.filter((todo) => {
         const todoDate = new Date(todo.createDate);
         return todoDate.getDay() === selectedWeekday;
@@ -99,15 +98,16 @@ function handleDateClick(date) {
         const day = date;
 
         const clickedDate = new Date(year, calendarDate.getMonth(), day);
-        const weekdayName = weekdayNames[clickedDate.getDay()]; // 선택한 날짜의 영어 요일 이름
+        const weekdayName = weekdayNames[clickedDate.getDay()];
         
         clickedWeekdayDisplay.textContent = `${weekdayName}`;
         clickedDateDisplay.textContent = `${day}`;
 
         calendarPageContainer.classList.add("isToDoListSidebarOpen");
 
-        generateTodoObj(year, monthName, day); // 수정된 generateTodoObj 함수 호출
+        generateTodoObj(year, monthName, day);
     
+
     }
     TodoListService.getInstance().updateTodoList();
 }

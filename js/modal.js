@@ -22,7 +22,7 @@ const modifySubmitButtonOnClick = (id, filterStatus) => {
         todoContent: newTodoContent
     }
     TodoListService.getInstance().setTodo(todoObj);
-    statusDropdownOnChangeHandle(filterStatus); // 수정 후에도 필터링 값을 적용
+    statusDropdownOnChangeHandle(filterStatus);
     closeModal();
 }
 
@@ -49,7 +49,7 @@ const modifyModal = (todo) => {
     `;
     const submitButton = modal.querySelector(".btn");
     submitButton.addEventListener("click", () => {
-        modifySubmitButtonOnClick(todo.id, currentFilterStatus); // 수정 함수 호출 시 필터링 값을 전달
+        modifySubmitButtonOnClick(todo.id, currentFilterStatus);
         closeModal();
     });
 }
