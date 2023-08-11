@@ -41,7 +41,7 @@
     margin: 5px 0px;
     border: 1px solid #444;
     border-width: 1px 0px;
-    padding: 10px;
+    padding: 20px;
     width: 100%;
     height: 50px;
     background-color: #333;
@@ -60,6 +60,7 @@
 
 /*  complet-chkboxs 클래스를 가진 첫번째 label 요소를 선택 */
 .complet-chkboxs + label {
+    position: relative;
     display: flex;
     justify-content: center;
     align-items: center;

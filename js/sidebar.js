@@ -16,6 +16,7 @@ const sidebarMenuOnClickHandle = (target) => {
             break;
         case "ToDoList":
             Routes.getInstance().routeState = "todolist";
+            filterTodoList(null);
             break;
         case "Calendar":
             Routes.getInstance().routeState = "calendar";
