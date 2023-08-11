@@ -67,7 +67,7 @@ const generateTodoObj = () => {
         completStatus: false
     };
 
-     // TodoListService를 이용하여 Todo 추가
+    // TodoListService를 이용하여 Todo 추가
     TodoListService.getInstance().addTodo(todoObj); 
 
     // 입력 필드 초기화
@@ -87,20 +87,6 @@ function filterTodoList(completStatus) {
     }
 
     TodoListService.getInstance().updateTodoList(tempArray);     // 업데이트된 Todo 리스트를 출력
-}
-
-// 캘린더 이벤트를 필터링하여 업데이트
-function filterCalendarList(year, month, day) {
-    const tempArray = CalendarService.getInstance().calendarList.filter((event) => {
-        const eventDate = new Date(event.year, event.month - 1, event.day);
-        const filterDate = new Date(year, month - 1, day);
-
-        // 선택된 날짜와 일치하는 이벤트만 보여줌
-        return eventDate.toDateString() === filterDate.toDateString();
-    });
-
-    // 업데이트된 캘린더 이벤트 리스트를 출력
-    CalendarService.getInstance().updateCalendarList(tempArray);
 }
 
 // Todo 리스트 관리 서비스 클래스

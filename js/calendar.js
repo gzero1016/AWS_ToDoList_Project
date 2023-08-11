@@ -74,17 +74,6 @@ clickedDateDisplay.textContent = `${todayDate}`;
 // 캘린더 초기화
 showCalendar();
 
-// 선택된 날짜에 해당하는 ToDo 목록 필터링
-function filterTodoListForSelectedDate(selectedDate) {
-    const selectedWeekday = selectedDate.getDay();  // 선택한 날짜의 요일
-    const tempArray = TodoListService.getInstance().todoList.filter((todo) => {
-        const todoDate = new Date(todo.createDate);
-        return todoDate.getDay() === selectedWeekday;
-    });
-
-    TodoListService.getInstance().updateTodoList(tempArray);
-}
-
 // 날짜 클릭 이벤트 처리
 function handleDateClick(date) {
     let clickedDateInfo = null;
