@@ -177,28 +177,28 @@ class TodoListService {
 
         // Todo 리스트 업데이트
     updateTodoList(filteredList = null) {
-    const todoListToShow = filteredList || this.todoList;
-    const todolistMainContainer = document.querySelector(".todolist-main-container");
-
-    todolistMainContainer.innerHTML = todoListToShow.map(todo => {
-            return `
-                <li class="todolist-items">
-                    <div class="item-left">
-                        <input type="checkbox" id="complet-chkbox${todo.id}" class="complet-chkboxs" ${todo.completStatus ? "checked" : ""} value="${todo.id}" onchange="checkedOnChangeHandle(this);">
-                        <label for="complet-chkbox${todo.id}"></label>
-                    </div>
-                    <div class="item-center">
-                        <pre class="todolist-content">${todo.todoContent}</pre>
-                    </div>
-                    <div class="item-right">
-                        <p class="todolist-date">${todo.createDate}</p>
-                        <div class="todolist-item-buttons">
-                            <button class="btn btn-edit" value="${todo.id}" onclick="modifyTodoOnClickHandle(this);">수정</button>
-                            <button class="btn btn-remove" value="${todo.id}" onclick="deleteTodoOnClickHandle(this);">삭제</button>
+        const todoListToShow = filteredList || this.todoList;
+        const todolistMainContainer = document.querySelector(".todolist-main-container");
+        console.log(todolistMainContainer);
+        todolistMainContainer.innerHTML = todoListToShow.map(todo => {
+                return `
+                    <li class="todolist-items">
+                        <div class="item-left">
+                            <input type="checkbox" id="complet-chkbox${todo.id}" class="complet-chkboxs" ${todo.completStatus ? "checked" : ""} value="${todo.id}" onchange="checkedOnChangeHandle(this);">
+                            <label for="complet-chkbox${todo.id}"></label>
                         </div>
-                    </div>
-                </li>
-            `;
+                        <div class="item-center">
+                            <pre class="todolist-content">${todo.todoContent}</pre>
+                        </div>
+                        <div class="item-right">
+                            <p class="todolist-date">${todo.createDate}</p>
+                            <div class="todolist-item-buttons">
+                                <button class="btn btn-edit" value="${todo.id}" onclick="modifyTodoOnClickHandle(this);">수정</button>
+                                <button class="btn btn-remove" value="${todo.id}" onclick="deleteTodoOnClickHandle(this);">삭제</button>
+                            </div>
+                        </div>
+                    </li>
+                `;
         }).join("");
     }
 }
