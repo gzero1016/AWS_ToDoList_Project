@@ -6,6 +6,7 @@
     <img src="https://img.shields.io/badge/html5-E34F26?style=flat-false&logo=html5&logoColor=white">
     <img src="https://img.shields.io/badge/css-1572B6?style=flat-false&logo=css3&logoColor=white">
     <img src="https://img.shields.io/badge/javascript-F7DF1E?style=flat-false&logo=javascript&logoColor=black">
+    </br>
     <img src="https://img.shields.io/badge/github-181717?style=flat-false&logo=github&logoColor=white">
     <img src="https://img.shields.io/badge/git-F05032?style=flat-false&logo=git&logoColor=white">
 </br>
