@@ -32,6 +32,7 @@ const modifySubmitButtonOnClick = (id, filterStatus) => {
 
     statusDropdownOnChangeHandle(filterStatus); // 필터링된 ToDo 목록 갱신
     closeModal();
+    updateCalendarTodoList(selectedDate);
 }
 
 // ToDo 항목을 수정하는 모달 생성 및 표시
@@ -70,5 +71,6 @@ const modifyModal = (todo) => {
         // "확인" 버튼 클릭 시 수정 내용 저장 및 모달 닫기
         modifySubmitButtonOnClick(todo.id, currentFilterStatus);
         closeModal();
+        updateCalendarTodoList(selectedDate);
     });
 }

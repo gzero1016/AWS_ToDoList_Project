@@ -3,6 +3,7 @@ const monthDisplay = document.querySelector(".calendar-month");
 const monthNames = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
 const weekdayNames = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
 let calendarDate = new Date();  //현재 날짜 캘린터 기본값
+let selectedDate = new Date();
 
 
 
@@ -67,9 +68,6 @@ function isToday(date) {
            date.getDate() === today.getDate();
 }
 
-// 작성자: junil
-/////이거 왜 두개냐!!!
-
 // 캘린더 초기화 시 오늘 날짜와 요일 표시
 const todayWeekdayName = weekdayNames[new Date().getDay()];
 const todayDate = new Date().getDate();
@@ -90,12 +88,14 @@ function handleDateClick(date) {
     // 작성자: junil
     // 클릭된 데이트 기준으로 다시 todolist업데이트
     updateCalendarTodoList(date);
+    selectedDate = date;
     
     // 캘린더 사이드바가 열려있지 않거나 선택한 날짜가 이전 선택과 다를 경우 처리
     if (!calendarPageContainer.classList.contains("isToDoListSidebarOpen") || clickedDateDisplay.textContent !== /*작성자: junil 데이트 타입이기 때문에 날짜 가지고 오는 getDate() 필요*/`${date.getDate()}일`) {
         const year = calendarDate.getFullYear();
         const monthName = monthNames[calendarDate.getMonth()];
-        const day = /*작성자: junil 데이트 타입이기 때문에 날짜 가지고 오는 getDate() 필요*/date.getDate();
+        /*작성자: junil 데이트 타입이기 때문에 날짜 가지고 오는 getDate() 필요*/
+        const day = date.getDate();
 
         const clickedDate = new Date(year, calendarDate.getMonth(), day);
         const weekdayName = weekdayNames[clickedDate.getDay()];
@@ -119,7 +119,22 @@ function updateCalendarTodoList(date) {
     
     // todolist에서 해당 날짜와 일치하는 todo만 필터링해서 li태그로 변환후 렌더링해줌.
     todolistCalendarContainer.innerHTML = TodoListService.getInstance().todoList.filter(todo => todo.createDate == DateUtils.toStringByFormatting(date)).map(todo => {
-        return `<li>${todo.todoContent}</li>`
+        return `
+        <li class="calendar-items">
+        <div class="calendar-left">
+            <input type="checkbox" id="calendar-chkbox${todo.id}" class="calendar-chkboxs" ${todo.completStatus ? "checked" : ""} value="${todo.id}" onchange="checkedOnChangeHandle(this);">
+            <label for="calendar-chkbox${todo.id}"></label>
+        </div>
+        <div class="item-center">
+            <pre class="todolist-content">${todo.todoContent}</pre>
+        </div>
+        <div class="item-right">
+            <div class="todolist-item-buttons">
+                <button class="calendar-edit" value="${todo.id}" onclick="modifyTodoOnClickHandle(this);"><i class="fa-solid fa-pen" style="color:#ffbb00;"></i></button>
+                <button class="calendar-btn-remove" value="${todo.id}" onclick="deleteTodoOnClickHandle(this);"><i class="fa-solid fa-xmark" style="color: #f50505;"></i></button>
+            </div>
+        </div>
+    </li>`
     });
 }
 

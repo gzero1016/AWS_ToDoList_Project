@@ -6,4 +6,5 @@ const listOnClickHandle = () => {
 const calendarOnClickHandle = () => {
     Routes.getInstance().routeState = "calendar";
     Routes.getInstance().show();
+    updateCalendarTodoList(calendarDate);
 } 

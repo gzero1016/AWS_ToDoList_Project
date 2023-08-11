@@ -1,6 +1,7 @@
 // 버튼 클릭 이벤트 핸들러
 const addTodoButtonOnClickHandle = () => {
     generateTodoObj();
+    updateCalendarTodoList(selectedDate);
 }
 
 // 드롭다운 박스의 옵션 값을 읽어와서 필터링하는 함수
@@ -43,6 +44,7 @@ const modifyTodoOnClickHandle = (target, filterStatus) => {
 // "삭제" 버튼 클릭 이벤트 핸들러
 const deleteTodoOnClickHandle = (target) => {
     TodoListService.getInstance().removeTodo(target.value); // 선택된 Todo 삭제
+    updateCalendarTodoList(selectedDate);
 }
 
 // "Add Todo" 버튼 클릭 시 Todo를 생성하는 함수
