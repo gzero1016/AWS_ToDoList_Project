@@ -55,7 +55,7 @@ function showCalendar() {
 
     // 작성자: junil
     //페이지가 로드되었을 때 현재 날짜 기준 todolist표시
-    updateCalendarTodoList(calendarDate);   
+    updateCalendarTodoList(calendarDate);
     //////////////////////////////////////////////////////
 }
 
@@ -69,12 +69,6 @@ function isToday(date) {
 
 // 작성자: junil
 /////이거 왜 두개냐!!!
-//날짜 클릭 이벤트 처리 함수
-// function handleDateClick(date) {
-
-//     // TodoListService.getInstance().updateTodoList(); //이건 todolist에서 업데이트 되는거임
-    
-// }
 
 // 캘린더 초기화 시 오늘 날짜와 요일 표시
 const todayWeekdayName = weekdayNames[new Date().getDay()];

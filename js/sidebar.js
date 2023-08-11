@@ -25,4 +25,5 @@ const sidebarMenuOnClickHandle = (target) => {
 
     Routes.getInstance().show();
     sidebarToggleButtonOnClickHandle();
+    updateCalendarTodoList(calendarDate);   
 }
