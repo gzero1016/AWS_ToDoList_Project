@@ -14,13 +14,13 @@
 
 ### 기능
 * Welcome 페이지에서 [ Calendar ] , [ List ] 클릭시 해당 페이지로 이동
-* Calendar 기본 날짜 Today
-* Calendar 해당 날짜 선택 시 날짜 변경
+* Calendar & 왼쪽 화면 초기날짜 Today로 표시
+* Calendar 해당 날짜 선택 시 왼쪽화면 날짜 변경
 * Calendar 선택한 날짜로 todo 추가
-* Calendar 선택한 날 todolist 출력
+* Calendar 선택한 날 todolist 출력,수정,삭제 기능
 * List 드롭박스 옵션값(전체, 진행중, 완료)에 따른 필터링
 * Modal을 이용해 수정기능 (List 드롭박스 옵션값 필터링 되어있는 상태에서 수정해도 필터링유지)
-* Sidebar에서 Calendar 이동시 today로 날짜 초기화
+* Sidebar에서 Calendar 이동시 날짜,todolist 초기화
 * Sidebar에서 List 이동시 드롭박스 전체로 초기화
 </br>
 </br>
@@ -37,6 +37,7 @@
 
 
 ### Calendar
+<img width="500" alt="image" src="https://github.com/gzero1016/AWS_TodoList_Project/assets/129514217/7f4b859c-44ca-436e-a26c-41b1bae8a4db">
 
 
 ### Sidebar
