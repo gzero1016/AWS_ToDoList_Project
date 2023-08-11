@@ -4,6 +4,8 @@ const monthNames = ["January", "February", "March", "April", "May", "June", "Jul
 const weekdayNames = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
 let calendarDate = new Date();  //현재 날짜 캘린터 기본값
 
+
+
 //캘린더 표시 함수
 function showCalendar() {
     const firstDay = new Date(calendarDate.getFullYear(), calendarDate.getMonth(), 1);
@@ -29,8 +31,11 @@ function showCalendar() {
             contentText.classList.add("today");
         }
         
-        contentText.addEventListener("click", () => {
-            handleDateClick(contentText.textContent);   //날짜 클릭 이벤트 처리
+        content.addEventListener("click", () => {
+            // 작성자: junil
+            // 날짜만 전달하는 것이 아닌 데이트타입 데이터 통으로 보내야함
+            const newDate = new Date(`${calendarDate.getFullYear()}-${calendarDate.getMonth() + 1}-${parseInt(contentText.textContent)}`);
+            handleDateClick(newDate);   //날짜 클릭 이벤트 처리
         });
         content.appendChild(contentText);
         cell.appendChild(content);
@@ -47,6 +52,11 @@ function showCalendar() {
     const monthName = monthNames[calendarDate.getMonth()];
     
     monthDisplay.textContent = `${monthName} ${calendarDate.getFullYear()}`;
+
+    // 작성자: junil
+    //페이지가 로드되었을 때 현재 날짜 기준 todolist표시
+    updateCalendarTodoList(calendarDate);   
+    //////////////////////////////////////////////////////
 }
 
 //오늘날짜 확인
@@ -57,11 +67,14 @@ function isToday(date) {
            date.getDate() === today.getDate();
 }
 
+// 작성자: junil
+/////이거 왜 두개냐!!!
 //날짜 클릭 이벤트 처리 함수
-function handleDateClick(date) {
+// function handleDateClick(date) {
 
-    TodoListService.getInstance().updateTodoList();
-}
+//     // TodoListService.getInstance().updateTodoList(); //이건 todolist에서 업데이트 되는거임
+    
+// }
 
 // 캘린더 초기화 시 오늘 날짜와 요일 표시
 const todayWeekdayName = weekdayNames[new Date().getDay()];
@@ -76,19 +89,19 @@ showCalendar();
 
 // 날짜 클릭 이벤트 처리
 function handleDateClick(date) {
-    let clickedDateInfo = null;
-
     const calendarPageContainer = document.querySelector(".calendar-page-container");
-    const mainContainer = document.querySelector(".main-container");
-    
     const clickedWeekdayDisplay = document.querySelector(".calendar-m");
     const clickedDateDisplay = document.querySelector(".calendar-day");
+
+    // 작성자: junil
+    // 클릭된 데이트 기준으로 다시 todolist업데이트
+    updateCalendarTodoList(date);
     
     // 캘린더 사이드바가 열려있지 않거나 선택한 날짜가 이전 선택과 다를 경우 처리
-    if (!calendarPageContainer.classList.contains("isToDoListSidebarOpen") || clickedDateDisplay.textContent !== `${date}일`) {
+    if (!calendarPageContainer.classList.contains("isToDoListSidebarOpen") || clickedDateDisplay.textContent !== /*작성자: junil 데이트 타입이기 때문에 날짜 가지고 오는 getDate() 필요*/`${date.getDate()}일`) {
         const year = calendarDate.getFullYear();
         const monthName = monthNames[calendarDate.getMonth()];
-        const day = date;
+        const day = /*작성자: junil 데이트 타입이기 때문에 날짜 가지고 오는 getDate() 필요*/date.getDate();
 
         const clickedDate = new Date(year, calendarDate.getMonth(), day);
         const weekdayName = weekdayNames[clickedDate.getDay()];
@@ -99,10 +112,21 @@ function handleDateClick(date) {
         calendarPageContainer.classList.add("isToDoListSidebarOpen");
 
         generateTodoObj(year, monthName, day);   // 선택한 날짜에 따른 ToDo 생성
-    
-
     }
+    // 작성자: junil
+    // 이건 todolist페이지에서 update하는 메소드임.
     TodoListService.getInstance().updateTodoList();
+}
+
+// 작성자: junil
+// 해당 날짜의 todo를 list로뿌려주는 메소드
+function updateCalendarTodoList(date) {
+    const todolistCalendarContainer = document.querySelector(".todolist-calendar-container");
+    
+    // todolist에서 해당 날짜와 일치하는 todo만 필터링해서 li태그로 변환후 렌더링해줌.
+    todolistCalendarContainer.innerHTML = TodoListService.getInstance().todoList.filter(todo => todo.createDate == DateUtils.toStringByFormatting(date)).map(todo => {
+        return `<li>${todo.todoContent}</li>`
+    });
 }
 
 // 이전 달로 이동하는 함수
