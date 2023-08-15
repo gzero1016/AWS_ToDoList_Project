@@ -4,6 +4,13 @@ const addTodoButtonOnClickHandle = () => {
     updateCalendarTodoList(selectedDate);
 }
 
+const addTodoOnKeyUpHandle = (event) => {
+    if(event.keyCode === 13) {
+        generateTodoObj();
+        updateCalendarTodoList(selectedDate);
+    }
+}
+
 // 드롭다운 박스의 옵션 값을 읽어와서 필터링하는 함수
 const statusDropdown = document.querySelector("#status-dropdown");
 const statusDropdownOnChangeHandle = () => {
