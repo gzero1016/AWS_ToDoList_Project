@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>ToDoList</title>
     <link rel="stylesheet" href="./css/reset.css">
     <link rel="stylesheet" href="./css/common.css">
     <link rel="stylesheet" href="./css/modal.css">
@@ -45,7 +45,7 @@
                     <div class="calendar-page-left">
                         <h2 class="calendar-m"></h2>
                         <h1 class="calendar-day" id="calendar-day"></h1>
-                        <input type="text" placeholder="please write here!" class="text-input">
+                        <input type="text" placeholder="please write here!" onkeyup="addTodoOnKeyUpHandle(event);" class="text-input">
                         <button class="calendar-btn" id="input-data" onclick="addTodoButtonOnClickHandle();">InPut</button>
                         <ul class="todolist-calendar-container">
                             <li>떠라 제발</li>
