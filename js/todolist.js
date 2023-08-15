@@ -18,9 +18,6 @@ const statusDropdownOnChangeHandle = () => {
 
     let statusValue;
     switch (selectedStatus) {
-        case "전체":
-            statusValue = null;
-            break;
         case "진행중":
             statusValue = false;
             break;
