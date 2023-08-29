@@ -89,7 +89,7 @@ function handleDateClick(date) {
     const calendarPageContainer = document.querySelector(".calendar-page-container");
     const clickedWeekdayDisplay = document.querySelector(".calendar-m");
     const clickedDateDisplay = document.querySelector(".calendar-day");
-
+    
     // 작성자: junil
     // 클릭된 데이트 기준으로 다시 todolist업데이트
     updateCalendarTodoList(date);
@@ -123,7 +123,9 @@ function updateCalendarTodoList(date) {
     const todolistCalendarContainer = document.querySelector(".todolist-calendar-container");
     
     // todolist에서 해당 날짜와 일치하는 todo만 필터링해서 li태그로 변환후 렌더링해줌.
-    todolistCalendarContainer.innerHTML = TodoListService.getInstance().todoList.filter(todo => todo.createDate == DateUtils.toStringByFormatting(date)).map(todo => {
+    todolistCalendarContainer.innerHTML = TodoListService.getInstance().todoList
+        .filter(todo => todo.createDate == DateUtils.toStringByFormatting(date))
+        .map(todo => {
         return `
         <li class="calendar-items">
         <div class="calendar-left">
