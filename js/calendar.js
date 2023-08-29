@@ -37,7 +37,12 @@ function showCalendar() {
             // 날짜만 전달하는 것이 아닌 데이트타입 데이터 통으로 보내야함
             const newDate = new Date(`${calendarDate.getFullYear()}-${calendarDate.getMonth() + 1}-${parseInt(contentText.textContent)}`);
             handleDateClick(newDate);   //날짜 클릭 이벤트 처리
+
+            const selectedCells = document.querySelectorAll(".selected-cell");
+            selectedCells.forEach(cell => cell.classList.remove("selected-cell"));
+            content.classList.add("selected-cell");
         });
+        
         content.appendChild(contentText);
         cell.appendChild(content);
         weekRow.appendChild(cell);

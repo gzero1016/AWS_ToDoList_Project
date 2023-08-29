@@ -199,8 +199,8 @@ class TodoListService {
                         <div class="item-right">
                             <p class="todolist-date">${todo.createDate}</p>
                             <div class="todolist-item-buttons">
-                                <button class="btn btn-edit" value="${todo.id}" onclick="modifyTodoOnClickHandle(this);">수정</button>
-                                <button class="btn btn-remove" value="${todo.id}" onclick="deleteTodoOnClickHandle(this);">삭제</button>
+                                <button class="btn btn-edit" value="${todo.id}" onclick="modifyTodoOnClickHandle(this);"><i class="fa-solid fa-pen" style="color:#ffbb00;"></i></button>
+                                <button class="btn btn-remove" value="${todo.id}" onclick="deleteTodoOnClickHandle(this);"><i class="fa-solid fa-xmark" style="color: #f50505;"></i></button>
                             </div>
                         </div>
                     </li>

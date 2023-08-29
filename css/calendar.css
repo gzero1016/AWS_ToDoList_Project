@@ -238,3 +238,9 @@
 .calendar-edit:active {
     background-color: #444;
 }
+
+.selected-cell {
+    font-weight: 700;
+    border-radius: 50%;
+    background-color: rgba(0, 0, 0, 0.1);
+}
